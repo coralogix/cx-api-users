@@ -1,0 +1,263 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "com/coralogix/user/settings/v1/archiving_provider.proto";
+import "com/coralogix/user/settings/v1/digest.proto";
+import "com/coralogix/user/settings/v1/email_filter.proto";
+import "com/coralogix/user/settings/v1/external_tokens.proto";
+import "com/coralogix/user/settings/v1/user_settings.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  AuditLogDescription audit_log_description = 5000;
+}
+
+service UserSettingsService {
+  rpc GenerateNewApiKeyForUser(GenerateNewApiKeyForUserRequest) returns (GenerateNewApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/api_key"
+    };
+  }
+
+  rpc GenerateNewEsApiKeyForUser(GenerateNewEsApiKeyForUserRequest) returns (GenerateNewEsApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new es-api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/es_api_key"
+    };
+  }
+
+  rpc GenerateNewTeamsApiKeyForUser(GenerateNewTeamsApiKeyForUserRequest) returns (GenerateNewTeamsApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new team-api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/teams_api_key"
+    };
+  }
+
+  rpc GetAllExternalTokens(GetAllExternalTokensRequest) returns (GetAllExternalTokensResponse) {
+    option (audit_log_description).description = "get all external tokens";
+    option (google.api.http) = {
+      get: "/api/v1/user/external-tokens"
+    };
+  }
+
+  rpc CreateExternalToken(CreateExternalTokenRequest) returns (CreateExternalTokenResponse) {
+    option (audit_log_description).description = "create external token";
+    option (google.api.http) = {
+      post: "/api/v1/user/external-tokens"
+      body: "*"
+    };
+  }
+
+  rpc UpdateExternalToken(UpdateExternalTokenRequest) returns (UpdateExternalTokenResponse) {
+    option (audit_log_description).description = "update external token";
+    option (google.api.http) = {
+      put: "/api/v1/user/external-tokens/{tokenId}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteExternalToken(DeleteExternalTokenRequest) returns (DeleteExternalTokenResponse) {
+    option (audit_log_description).description = "delete external token";
+    option (google.api.http) = {
+      delete: "/api/v1/user/external-tokens/{token_id}"
+      body: "*"
+    };
+  }
+
+  rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
+    option (audit_log_description).description = "get all email filters";
+    option (google.api.http) = {
+      get: "/api/v1/emailFilters"
+    };
+  }
+
+  rpc AddEmailFilter(AddEmailFilterRequest) returns (AddEmailFilterResponse) {
+    option (audit_log_description).description = "add email filter";
+    option (google.api.http) = {
+      post: "/api/v1/emailFilters"
+      body: "*"
+    };
+  }
+
+  rpc UpdateEmailFilter(UpdateEmailFilterRequest) returns (UpdateEmailFilterResponse) {
+    option (audit_log_description).description = "update email filter";
+    option (google.api.http) = {
+      post: "/api/v1/emailFilters/edit"
+      body: "*"
+    };
+  }
+
+  rpc DeleteEmailFilter(DeleteEmailFilterRequest) returns (DeleteEmailFilterResponse) {
+    option (audit_log_description).description = "delete email filter";
+    option (google.api.http) = {
+      delete: "/api/v1/emailFilters/{id}"
+      body: "*"
+    };
+  }
+
+  rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UpdateUserSettingsResponse) {
+    option (audit_log_description).description = "update user settings";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings"
+      body: "*"
+    };
+  }
+
+  rpc GetUserSettings(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
+    option (audit_log_description).description = "get user settings";
+    option (google.api.http) = {
+      get: "/api/v1/user/settings"
+    };
+  }
+
+  rpc GetDigests(GetDigestsRequest) returns (GetDigestsResponse) {
+    option (audit_log_description).description = "get digests";
+    option (google.api.http) = {
+      get: "/api/v1/digests"
+    };
+  }
+
+  rpc UpdateDigests(UpdateDigestsRequest) returns (UpdateDigestsResponse) {
+    option (audit_log_description).description = "update digests";
+    option (google.api.http) = {
+      post: "/api/v1/digests"
+      body: "*"
+    };
+  }
+}
+
+message GenerateNewApiKeyForUserRequest{}
+
+message GenerateNewApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GenerateNewEsApiKeyForUserRequest{}
+
+message GenerateNewEsApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GenerateNewTeamsApiKeyForUserRequest{}
+
+message GenerateNewTeamsApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GetAllExternalTokensRequest{}
+
+message GetAllExternalTokensResponse{
+  ExternalIntegrationConfigWithData   slack = 1 ;
+  ExternalIntegrationConfigWithData   aws_sns = 2;
+  ExternalIntegrationConfigWithData   bitbucket = 3;
+  ExternalIntegrationConfigWithData   git_hub = 4;
+  ExternalIntegrationConfigWithData   git_lab = 5;
+  ExternalIntegrationConfigWithData   pager_duty = 6;
+  ExternalIntegrationConfigWithData   opsgenie = 7;
+  ExternalIntegrationConfigWithData   prometheus = 8;
+  ExternalIntegrationConfig           aws = 9;
+  ExternalIntegrationConfig           gcp = 10;
+  ExternalIntegrationConfig           azure = 11;
+  ExternalIntegrationConfigWithData   statuspage = 12;
+  ExternalIntegrationConfigWithData   cloudflare = 13;
+  ExternalIntegrationConfigWithData   intercom = 14;
+}
+
+message CreateExternalTokenRequest{
+  google.protobuf.StringValue name = 1;
+  SourceSystem                source_system = 2;
+  google.protobuf.Struct      config = 3;
+  google.protobuf.StringValue token = 4;
+}
+message CreateExternalTokenResponse{
+  SingleExternalIntegrationConfig external_integration_config = 1;
+}
+
+message UpdateExternalTokenRequest{
+  google.protobuf.StringValue token_id = 1;
+  UpdateExternalTokenData     data = 2;
+}
+message UpdateExternalTokenResponse{
+  SingleExternalIntegrationConfig external_integration_config = 1;
+}
+
+message DeleteExternalTokenRequest{
+  google.protobuf.StringValue token_id = 1;
+}
+message DeleteExternalTokenResponse{}
+
+message TestGetArchiveProvidersRequest {}
+message TestGetArchiveProvidersResponse {
+  repeated ArchivingProvider archiving_providers = 1;
+}
+
+
+message GetAllEmailFiltersRequest{}
+message GetAllEmailFiltersResponse{
+  google.protobuf.UInt32Value    id = 1;
+  google.protobuf.StringValue    user_id = 2;
+  google.protobuf.Timestamp      created_at = 3;
+  google.protobuf.Timestamp      updated_at = 4;
+  repeated EmailFilterDefinition email_filter_definitions = 5;
+}
+
+message AddEmailFilterRequest{
+  google.protobuf.StringValue  application_name = 1;
+  repeated google.protobuf.StringValue subsystem_name = 2;
+}
+message AddEmailFilterResponse{
+  EmailFilterDefinition email_filter_definition = 1;
+}
+
+message UpdateEmailFilterRequest{
+  google.protobuf.StringValue           application_name = 1;
+  google.protobuf.UInt32Value           id = 2;
+  repeated google.protobuf.StringValue  subsystem_name = 3;
+}
+message UpdateEmailFilterResponse{
+  EmailFilterDefinition email_filter_definition = 1;
+}
+
+message DeleteEmailFilterRequest{
+  google.protobuf.UInt32Value id = 1;
+}
+message DeleteEmailFilterResponse{
+  google.protobuf.BoolValue   deleted = 1;
+  google.protobuf.UInt32Value id = 2;
+}
+
+message UpdateUserSettingsRequest{
+  google.protobuf.StringValue data = 1;
+}
+message UpdateUserSettingsResponse{
+  google.protobuf.StringValue data = 1;
+}
+
+message GetUserSettingsRequest{}
+message GetUserSettingsResponse{
+  UserSettings user_settings = 1;
+}
+
+message GetDigestsRequest{}
+message GetDigestsResponse{
+  repeated Digest digests = 1;
+}
+
+message UpdateDigestsRequest{
+  google.protobuf.UInt32Value id = 1;
+  google.protobuf.BoolValue   enabled = 2;
+}
+
+message UpdateDigestsResponse{
+  google.protobuf.BoolValue updated = 1;
+}
