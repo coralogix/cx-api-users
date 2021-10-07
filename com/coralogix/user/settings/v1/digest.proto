@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message Digest{
+  google.protobuf.UInt32Value id = 1;
+  google.protobuf.StringValue label = 2;
+  google.protobuf.BoolValue   enabled = 3;
+}

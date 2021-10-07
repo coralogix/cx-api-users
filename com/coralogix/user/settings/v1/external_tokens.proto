@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+enum SourceSystem {
+  SOURCE_SYSTEM_UNSPECIFIED = 0;
+  SOURCE_SYSTEM_GITHUB = 1;
+  SOURCE_SYSTEM_GITLAB = 2;
+  SOURCE_SYSTEM_PAGERDUTY = 3;
+  SOURCE_SYSTEM_BITBUCKET = 4;
+  SOURCE_SYSTEM_PROMETHEUS = 5;
+  SOURCE_SYSTEM_AWS_SNS = 6;
+  SOURCE_SYSTEM_OPSGENIE = 7;
+  SOURCE_SYSTEM_SLACK = 8;
+  SOURCE_SYSTEM_INTERCOM = 9;
+  SOURCE_SYSTEM_AWS = 10;
+  SOURCE_SYSTEM_GCP = 11;
+  SOURCE_SYSTEM_AZURE = 12;
+  SOURCE_SYSTEM_CLOUDFLARE = 13;
+  SOURCE_SYSTEM_STATUSPAGE = 14;
+}
+
+enum ExternalKeyType {
+  EXTERNAL_KEY_TYPE_UNSPECIFIED = 0;
+  EXTERNAL_KEY_TYPE_TOKEN = 1;
+  EXTERNAL_KEY_TYPE_FLAG = 2;
+  EXTERNAL_KEY_TYPE_CLOUDFLARE = 3;
+  EXTERNAL_KEY_TYPE_STATUSPAGE = 4;
+  EXTERNAL_KEY_TYPE_INTERCOM = 5;
+}
+
+message ExternalTokenData {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue token = 2;
+  google.protobuf.StringValue id = 3;
+  google.protobuf.StringValue config = 4;
+  google.protobuf.Timestamp   created_at = 5;
+}
+
+
+message SingleExternalIntegrationConfig {
+  google.protobuf.StringValue id =1;
+  google.protobuf.UInt32Value company_id = 2;
+  google.protobuf.StringValue name = 3;
+  SourceSystem                source_system = 4;
+  google.protobuf.StringValue token = 5;
+  google.protobuf.StringValue config = 6;
+  google.protobuf.Timestamp   created_at = 7;
+  google.protobuf.Timestamp   updated_at = 8;
+}
+
+message ExternalIntegrationConfigWithData {
+  SourceSystem                 source_system = 1;
+  ExternalKeyType              type = 2;
+  repeated ExternalTokenData   data = 3;
+}
+
+message ExternalIntegrationConfig {
+  SourceSystem                 source_system = 1;
+  ExternalKeyType              type = 2;
+  google.protobuf.BoolValue    is_active = 3;
+  google.protobuf.StringValue  id = 4;
+}
+
+extend google.protobuf.FieldOptions {
+  SourceSystem    source_system_option = 10001;
+  ExternalKeyType type_option = 10002;
+}
+
+message UpdateExternalTokenData {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue token = 2; // UUID
+  google.protobuf.StringValue config = 3; // TODO - make it Struct
+}
