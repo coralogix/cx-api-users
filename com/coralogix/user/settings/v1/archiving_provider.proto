@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message ArchivingProvider{
+  google.protobuf.UInt32Value id = 1;
+  google.protobuf.StringValue provider = 2;
+  google.protobuf.StringValue region = 3;
+  google.protobuf.StringValue name = 4;
+  google.protobuf.StringValue private_key = 5;
+  google.protobuf.BoolValue   active = 6;
+  google.protobuf.UInt32Value archive_format = 7;
+}

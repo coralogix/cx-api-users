@@ -1,0 +1,377 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "com/coralogix/user/settings/v1/archiving_provider.proto";
+import "com/coralogix/user/settings/v1/digest.proto";
+import "com/coralogix/user/settings/v1/email_filter.proto";
+import "com/coralogix/user/settings/v1/external_tokens.proto";
+import "com/coralogix/user/settings/v1/log_column.proto";
+import "com/coralogix/user/settings/v1/user_settings.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  AuditLogDescription audit_log_description = 5000;
+}
+
+service UserSettingsService {
+  rpc GenerateNewApiKeyForUser(GenerateNewApiKeyForUserRequest) returns (GenerateNewApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/api_key"
+      body: "user_settings"
+    };
+  }
+
+  rpc GenerateNewEsApiKeyForUser(GenerateNewEsApiKeyForUserRequest) returns (GenerateNewEsApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new es-api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/es_api_key"
+      body: "user_settings"
+    };
+  }
+
+  rpc GenerateNewTeamsApiKeyForUser(GenerateNewTeamsApiKeyForUserRequest) returns (GenerateNewTeamsApiKeyForUserResponse) {
+    option (audit_log_description).description = "generate new team-api key for user";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/teams_api_key"
+      body: "user_settings"
+    };
+  }
+
+  rpc GetAllExternalTokens(GetAllExternalTokensRequest) returns (GetAllExternalTokensResponse) {
+    option (audit_log_description).description = "get all external tokens";
+    option (google.api.http) = {
+      get: "/api/v1/user/external-tokens"
+      body: "external_integration_configs"
+    };
+  }
+
+  rpc CreateExternalToken(CreateExternalTokenRequest) returns (CreateExternalTokenResponse) {
+    option (audit_log_description).description = "create external token";
+    option (google.api.http) = {
+      post: "/api/v1/user/external-tokens"
+      body: "external_integration_config"
+    };
+  }
+
+  rpc UpdateExternalToken(UpdateExternalTokenRequest) returns (UpdateExternalTokenResponse) {
+    option (audit_log_description).description = "update external token";
+    option (google.api.http) = {
+      put: "/api/v1/user/external-tokens/{tokenId}"
+      body: "external_integration_config"
+    };
+  }
+
+  rpc DeleteExternalToken(DeleteExternalTokenRequest) returns (DeleteExternalTokenResponse) {
+    option (audit_log_description).description = "delete external token";
+    option (google.api.http) = {
+      delete: "/api/v1/user/external-tokens/{tokenId}"
+    };
+  }
+
+  rpc TestGetArchiveProviders(TestGetArchiveProvidersRequest) returns (TestGetArchiveProvidersResponse) {
+    option (audit_log_description).description = "test get archive providers";
+    option (google.api.http) = {
+      get: "/api/v1/testGetFilters"
+      body: "*"
+    };
+  }
+
+  rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
+    option (audit_log_description).description = "get all email filters";
+    option (google.api.http) = {
+      get: "/api/v1/emailFilters"
+      body: "*"
+    };
+  }
+
+  rpc AddEmailFilters(AddEmailFiltersRequest) returns (AddEmailFiltersResponse) {
+    option (audit_log_description).description = "add email filter";
+    option (google.api.http) = {
+      post: "/api/v1/emailFilters"
+      body: "email_filter_definition"
+    };
+  }
+
+  rpc UpdateEmailFilter(UpdateEmailFilterRequest) returns (UpdateEmailFilterResponse) {
+    option (audit_log_description).description = "update email filter";
+    option (google.api.http) = {
+      post: "/api/v1/emailFilters/edit"
+      body: "email_filter_definition"
+    };
+  }
+
+  rpc DeleteEmailFilter(DeleteEmailFilterRequest) returns (DeleteEmailFilterResponse) {
+    option (audit_log_description).description = "delete email filter";
+    option (google.api.http) = {
+      delete: "/api/v1/emailFilters/{id}"
+      body: "*"
+    };
+  }
+
+  rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UpdateUserSettingsResponse) {
+    option (audit_log_description).description = "update user settings";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings"
+      body: "user_settings"
+    };
+  }
+
+  rpc GetUserSettings(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
+    option (audit_log_description).description = "get user settings";
+    option (google.api.http) = {
+      delete: "/api/v1/user/settings"
+      body: "user_settings"
+    };
+  }
+
+  // GET /api/v1/user/logColumn
+  rpc GetAllLogColumns(GetAllLogColumnsRequest) returns (GetAllLogColumnsResponse) {
+    option (audit_log_description).description = "get all log columns";
+    option (google.api.http) = {
+      get: "/api/v1/user/logColumn"
+      body: "log_columns"
+    };
+  }
+  // POST /api/v1/user/logColumn
+  rpc AddNewLogColumn(AddNewLogColumnRequest) returns (AddNewLogColumnResponse) {
+    option (audit_log_description).description = "add new log column";
+    option (google.api.http) = {
+      post: "/api/v1/user/logColumn"
+      body: "log_column"
+    };
+  }
+
+  rpc DeleteLogColumn(DeleteLogColumnRequest) returns (DeleteLogColumnResponse) {
+    option (audit_log_description).description = "delete log column";
+    option (google.api.http) = {
+      delete: "/api/v1/user/logColumn/{id}"
+    };
+  }
+
+  rpc GetDigests(GetDigestsRequest) returns (GetDigestsResponse) {
+    option (audit_log_description).description = "get digests";
+    option (google.api.http) = {
+      get: "/api/v1/digests"
+      body: "*"
+    };
+  }
+
+  rpc UpdateDigests(UpdateDigestsRequest) returns (UpdateDigestsResponse) {
+    option (audit_log_description).description = "update digests";
+    option (google.api.http) = {
+      post: "/api/v1/digests"
+      body: "*"
+    };
+  }
+}
+
+message GenerateNewApiKeyForUserRequest{}
+
+message GenerateNewApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GenerateNewEsApiKeyForUserRequest{}
+
+message GenerateNewEsApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GenerateNewTeamsApiKeyForUserRequest{}
+
+message GenerateNewTeamsApiKeyForUserResponse{
+  UserSettings user_settings = 1;
+}
+
+message GetAllExternalTokensRequest{}
+
+message GetAllExternalTokensResponse{
+  // TODO Not yet sure how and if we want to simulate the old structure, leaving it as is for now
+  repeated ExternalIntegrationConfig external_integration_configs = 1;
+  //   {
+  // 		Slack: {
+  // 			sourceSystem: 'Slack',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		AwsSns: {
+  // 			sourceSystem: 'AwsSns',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		Bitbucket: {
+  // 			sourceSystem: 'Bitbucket',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		GitHub: {
+  // 			sourceSystem: 'GitHub',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		GitLab: {
+  // 			sourceSystem: 'GitLab',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		PagerDuty: {
+  // 			sourceSystem: 'PagerDuty',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		Opsgenie: {
+  // 			sourceSystem: 'Opsgenie',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		Prometheus: {
+  // 			sourceSystem: 'Prometheus',
+  // 			type: externalKeysTypes.TOKEN,
+  // 			data: []
+  // 		},
+  // 		AWS: {
+  // 			sourceSystem: 'AWS',
+  // 			type: externalKeysTypes.FLAG,
+  // 			active: false,
+  // 			id: ''
+  // 		},
+  // 		GCP: {
+  // 			sourceSystem: 'GCP',
+  // 			type: externalKeysTypes.FLAG,
+  // 			active: false,
+  // 			id: ''
+  // 		},
+  // 		Azure: {
+  // 			sourceSystem: 'Azure',
+  // 			type: externalKeysTypes.FLAG,
+  // 			active: false,
+  // 			id: ''
+  // 		},
+  // 		Statuspage: {
+  // 			sourceSystem: 'Statuspage',
+  // 			type: externalKeysTypes.STATUSPAGE,
+  // 			data: []
+  // 		},
+  // 		Cloudflare: {
+  // 			sourceSystem: 'Cloudflare',
+  // 			type: externalKeysTypes.CLOUDFLARE,
+  // 			data: []
+  // 		},
+  // 		Intercom: {
+  // 			sourceSystem: 'Intercom',
+  // 			type: externalKeysTypes.INTERCOM,
+  // 			data: []
+  // 		}
+  // 	}
+}
+
+message CreateExternalTokenRequest{
+  google.protobuf.StringValue name = 1;
+  SourceSystem                sourceSystem = 2;
+  google.protobuf.StringValue config = 3; // Json
+  google.protobuf.StringValue token = 4;
+}
+message CreateExternalTokenResponse{
+  ExternalIntegrationConfig external_integration_config = 1;
+}
+
+message UpdateExternalTokenRequest{
+  google.protobuf.StringValue tokenId = 1;
+  google.protobuf.StringValue token = 2;
+}
+message UpdateExternalTokenResponse{
+  ExternalIntegrationConfig external_integration_config = 1;
+}
+
+message DeleteExternalTokenRequest{
+  google.protobuf.StringValue tokenId = 1;
+}
+message DeleteExternalTokenResponse{}
+
+message TestGetArchiveProvidersRequest {}
+message TestGetArchiveProvidersResponse {
+  repeated ArchivingProvider archiving_providers = 1;
+}
+
+
+message GetAllEmailFiltersRequest{}
+message GetAllEmailFiltersResponse{
+  google.protobuf.UInt32Value    id = 1;
+  google.protobuf.StringValue    user_id = 2;
+  google.protobuf.Timestamp      created_at = 3;
+  google.protobuf.Timestamp      updated_at = 4;
+  repeated EmailFilterDefinition email_filter_definitions = 5;
+}
+
+message AddEmailFiltersRequest{
+  google.protobuf.StringValue  applicationName = 1;
+  repeated google.protobuf.StringValue subsystemName = 2;
+}
+message AddEmailFiltersResponse{
+  EmailFilterDefinition email_filter_definition = 1;
+}
+
+message UpdateEmailFilterRequest{
+  google.protobuf.StringValue           applicationName = 1;
+  google.protobuf.UInt32Value           id = 2;
+  repeated google.protobuf.StringValue  subsystemName = 3;
+}
+message UpdateEmailFilterResponse{
+  EmailFilterDefinition email_filter_definition = 1;
+}
+
+message DeleteEmailFilterRequest{}
+message DeleteEmailFilterResponse{
+  google.protobuf.UInt32Value id = 1;
+}
+
+message UpdateUserSettingsRequest{
+  UserSettings user_settings = 1;
+}
+message UpdateUserSettingsResponse{
+  UserSettings user_settings = 1;
+}
+
+message GetUserSettingsRequest{}
+message GetUserSettingsResponse{
+  UserSettings user_settings = 1;
+}
+
+message GetAllLogColumnsRequest{}
+message GetAllLogColumnsResponse{
+  repeated LogColumn log_columns = 1;
+}
+
+message AddNewLogColumnRequest{
+  google.protobuf.StringValue header_name = 1;
+  google.protobuf.StringValue field_name = 2;
+}
+message AddNewLogColumnResponse{
+  LogColumn log_column = 1;
+}
+
+message DeleteLogColumnRequest{}
+message DeleteLogColumnResponse{}
+
+message GetDigestsRequest{}
+message GetDigestsResponse{
+  repeated Digest digests = 1;
+}
+
+message UpdateDigestsRequest{
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue   enabled = 2;
+}
+// TODO make sure it is compatible, previous response looked like this [null,1]
+message UpdateDigestsResponse{
+  google.protobuf.BoolValue updated = 1;
+}

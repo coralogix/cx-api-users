@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message EmailFilter{
+  google.protobuf.UInt32Value id = 1;
+  google.protobuf.StringValue user_id = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}
+
+message EmailFilterDefinition{
+  google.protobuf.UInt32Value id = 1;
+  google.protobuf.UInt32Value email_filter_id = 2;
+  google.protobuf.StringValue applicationName = 3;
+  google.protobuf.StringValue subsystemName = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}

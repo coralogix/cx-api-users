@@ -1,0 +1,6 @@
+name: cx-api-user-settings
+CX_PRODUCT: apis
+deployable_type: library
+code_language: protobuf
+tests: true
+publish: false

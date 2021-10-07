@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+enum SourceSystem {
+  UNKNOWN = 0;
+  GITHUB = 1;
+  GITLAB = 2;
+  PAGERDUTY = 3;
+  BITBUCKET = 4;
+  PROMETHEUS = 5;
+  AWS_SNS = 6;
+  OPSGENIE = 7;
+  SLACK = 8;
+  INTERCOM = 9;
+  AWS = 10;
+  GCP = 11;
+  AZURE = 12;
+  CLOUDFLARE = 13;
+  STATUSPAGE = 14;
+}
+
+enum ExternalKeyType {
+  EXTERNAL_KEY_TYPE_UNSPECIFIED = 0;
+  EXTERNAL_KEY_TYPE_TOKEN = 1;
+  EXTERNAL_KEY_TYPE_FLAG = 2;
+  EXTERNAL_KEY_TYPE_CLOUDFLARE = 3;
+  EXTERNAL_KEY_TYPE_STATUSPAGE = 4;
+  EXTERNAL_KEY_TYPE_INTERCOM = 5;
+}
+
+message ExternalIntegrationConfig {
+  google.protobuf.StringValue  id = 1;
+  google.protobuf.Int32Value   companyId = 2;
+  SourceSystem                 sourceSystem = 3;
+  google.protobuf.StringValue  token = 4;
+  google.protobuf.Timestamp    createdAt = 5;
+  google.protobuf.Timestamp    updatedAt = 6;
+  ExternalKeyType type = 7;
+}
