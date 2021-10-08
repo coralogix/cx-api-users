@@ -15,8 +15,8 @@ message EmailFilter{
 message EmailFilterDefinition{
   google.protobuf.UInt32Value id = 1;
   google.protobuf.UInt32Value email_filter_id = 2;
-  google.protobuf.StringValue applicationName = 3;
-  google.protobuf.StringValue subsystemName = 4;
+  google.protobuf.StringValue application_name = 3;
+  google.protobuf.StringValue subsystem_name = 4;
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
 }

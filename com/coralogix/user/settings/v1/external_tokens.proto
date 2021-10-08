@@ -6,21 +6,21 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 enum SourceSystem {
-  UNKNOWN = 0;
-  GITHUB = 1;
-  GITLAB = 2;
-  PAGERDUTY = 3;
-  BITBUCKET = 4;
-  PROMETHEUS = 5;
-  AWS_SNS = 6;
-  OPSGENIE = 7;
-  SLACK = 8;
-  INTERCOM = 9;
-  AWS = 10;
-  GCP = 11;
-  AZURE = 12;
-  CLOUDFLARE = 13;
-  STATUSPAGE = 14;
+  SOURCE_SYSTEM_UNSPECIFIED = 0;
+  SOURCE_SYSTEM_GITHUB = 1;
+  SOURCE_SYSTEM_GITLAB = 2;
+  SOURCE_SYSTEM_PAGERDUTY = 3;
+  SOURCE_SYSTEM_BITBUCKET = 4;
+  SOURCE_SYSTEM_PROMETHEUS = 5;
+  SOURCE_SYSTEM_AWS_SNS = 6;
+  SOURCE_SYSTEM_OPSGENIE = 7;
+  SOURCE_SYSTEM_SLACK = 8;
+  SOURCE_SYSTEM_INTERCOM = 9;
+  SOURCE_SYSTEM_AWS = 10;
+  SOURCE_SYSTEM_GCP = 11;
+  SOURCE_SYSTEM_AZURE = 12;
+  SOURCE_SYSTEM_CLOUDFLARE = 13;
+  SOURCE_SYSTEM_STATUSPAGE = 14;
 }
 
 enum ExternalKeyType {
@@ -34,10 +34,10 @@ enum ExternalKeyType {
 
 message ExternalIntegrationConfig {
   google.protobuf.StringValue  id = 1;
-  google.protobuf.Int32Value   companyId = 2;
-  SourceSystem                 sourceSystem = 3;
+  google.protobuf.Int32Value   company_id = 2;
+  SourceSystem                 source_system = 3;
   google.protobuf.StringValue  token = 4;
-  google.protobuf.Timestamp    createdAt = 5;
-  google.protobuf.Timestamp    updatedAt = 6;
-  ExternalKeyType type = 7;
+  google.protobuf.Timestamp    created_at = 5;
+  google.protobuf.Timestamp    updated_at = 6;
+  ExternalKeyType              type = 7;
 }
