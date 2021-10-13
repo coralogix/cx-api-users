@@ -93,7 +93,7 @@ service UserSettingsService {
     };
   }
 
-  rpc AddEmailFilters(AddEmailFiltersRequest) returns (AddEmailFiltersResponse) {
+  rpc AddEmailFilter(AddEmailFilterRequest) returns (AddEmailFilterResponse) {
     option (audit_log_description).description = "add email filter";
     option (google.api.http) = {
       post: "/api/v1/emailFilters"
@@ -113,7 +113,7 @@ service UserSettingsService {
     option (audit_log_description).description = "delete email filter";
     option (google.api.http) = {
       delete: "/api/v1/emailFilters/{id}"
-      body: "*"
+      body: "deleted"
     };
   }
 
@@ -133,7 +133,6 @@ service UserSettingsService {
     };
   }
 
-  // GET /api/v1/user/logColumn
   rpc GetAllLogColumns(GetAllLogColumnsRequest) returns (GetAllLogColumnsResponse) {
     option (audit_log_description).description = "get all log columns";
     option (google.api.http) = {
@@ -141,7 +140,7 @@ service UserSettingsService {
       body: "log_columns"
     };
   }
-  // POST /api/v1/user/logColumn
+
   rpc AddNewLogColumn(AddNewLogColumnRequest) returns (AddNewLogColumnResponse) {
     option (audit_log_description).description = "add new log column";
     option (google.api.http) = {
@@ -161,7 +160,7 @@ service UserSettingsService {
     option (audit_log_description).description = "get digests";
     option (google.api.http) = {
       get: "/api/v1/digests"
-      body: "*"
+      body: "digests"
     };
   }
 
@@ -312,11 +311,11 @@ message GetAllEmailFiltersResponse{
   repeated EmailFilterDefinition email_filter_definitions = 5;
 }
 
-message AddEmailFiltersRequest{
+message AddEmailFilterRequest{
   google.protobuf.StringValue  application_name = 1;
   repeated google.protobuf.StringValue subsystem_name = 2;
 }
-message AddEmailFiltersResponse{
+message AddEmailFilterResponse{
   EmailFilterDefinition email_filter_definition = 1;
 }
 
@@ -329,9 +328,11 @@ message UpdateEmailFilterResponse{
   EmailFilterDefinition email_filter_definition = 1;
 }
 
-message DeleteEmailFilterRequest{}
-message DeleteEmailFilterResponse{
+message DeleteEmailFilterRequest{
   google.protobuf.UInt32Value id = 1;
+}
+message DeleteEmailFilterResponse{
+  google.protobuf.BoolValue deleted = 1;
 }
 
 message UpdateUserSettingsRequest{
@@ -368,7 +369,7 @@ message GetDigestsResponse{
 }
 
 message UpdateDigestsRequest{
-  google.protobuf.StringValue id = 1;
+  google.protobuf.UInt32Value id = 1;
   google.protobuf.BoolValue   enabled = 2;
 }
 // TODO make sure it is compatible, previous response looked like this [null,1]
