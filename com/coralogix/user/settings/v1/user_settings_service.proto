@@ -194,83 +194,55 @@ message GenerateNewTeamsApiKeyForUserResponse{
 message GetAllExternalTokensRequest{}
 
 message GetAllExternalTokensResponse{
-  // TODO Not yet sure how and if we want to simulate the old structure, leaving it as is for now
-  repeated ExternalIntegrationConfig external_integration_configs = 1;
-  //   {
-  // 		Slack: {
-  // 			sourceSystem: 'Slack',
-  // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		AwsSns: {
+  ExternalIntegrationConfigWithData   Slack = 1 [
+    (source_system_option) = SOURCE_SYSTEM_SLACK,
+    (type_option) = EXTERNAL_KEY_TYPE_TOKEN
+  ];
+  ExternalIntegrationConfigWithData   AwsSns = 2;
   // 			sourceSystem: 'AwsSns',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		Bitbucket: {
+  ExternalIntegrationConfigWithData   Bitbucket = 3;
   // 			sourceSystem: 'Bitbucket',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		GitHub: {
+  ExternalIntegrationConfigWithData	  GitHub = 4;
   // 			sourceSystem: 'GitHub',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		GitLab: {
+  ExternalIntegrationConfigWithData		GitLab = 5;
   // 			sourceSystem: 'GitLab',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		PagerDuty: {
+  ExternalIntegrationConfigWithData   PagerDuty = 6;
   // 			sourceSystem: 'PagerDuty',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		Opsgenie: {
+  ExternalIntegrationConfigWithData   Opsgenie = 7;
   // 			sourceSystem: 'Opsgenie',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		Prometheus: {
+  ExternalIntegrationConfigWithData   Prometheus = 8;
   // 			sourceSystem: 'Prometheus',
   // 			type: externalKeysTypes.TOKEN,
-  // 			data: []
-  // 		},
-  // 		AWS: {
+  ExternalIntegrationConfig            AWS = 9;
   // 			sourceSystem: 'AWS',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  // 		},
-  // 		GCP: {
+  ExternalIntegrationConfig           GCP = 10;
   // 			sourceSystem: 'GCP',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  // 		},
-  // 		Azure: {
+  ExternalIntegrationConfig           Azure = 11;
   // 			sourceSystem: 'Azure',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  // 		},
-  // 		Statuspage: {
+  ExternalIntegrationConfigWithData   Statuspage = 12;
   // 			sourceSystem: 'Statuspage',
   // 			type: externalKeysTypes.STATUSPAGE,
-  // 			data: []
-  // 		},
-  // 		Cloudflare: {
+  ExternalIntegrationConfigWithData   Cloudflare = 13;
   // 			sourceSystem: 'Cloudflare',
   // 			type: externalKeysTypes.CLOUDFLARE,
-  // 			data: []
-  // 		},
-  // 		Intercom: {
+  ExternalIntegrationConfigWithData   Intercom = 14;
   // 			sourceSystem: 'Intercom',
   // 			type: externalKeysTypes.INTERCOM,
-  // 			data: []
-  // 		}
-  // 	}
 }
 
 message CreateExternalTokenRequest{
