@@ -77,13 +77,16 @@ service UserSettingsService {
     };
   }
 
-  rpc TestGetArchiveProviders(TestGetArchiveProvidersRequest) returns (TestGetArchiveProvidersResponse) {
-    option (audit_log_description).description = "test get archive providers";
-    option (google.api.http) = {
-      get: "/api/v1/testGetFilters"
-      body: "*"
-    };
-  }
+  // TODO - document it somewhere - this is dummy endpoiont, I have created model just to know that it does not even work on dev
+  //   It should be in `query archive API` based on:
+  //   https://coralogix.atlassian.net/wiki/spaces/ZA/pages/2429747201/Webapi+routes+per+feature+cx-product
+  // rpc TestGetArchiveProviders(TestGetArchiveProvidersRequest) returns (TestGetArchiveProvidersResponse) {
+  //   option (audit_log_description).description = "test get archive providers";
+  //   option (google.api.http) = {
+  //     get: "/api/v1/testGetFilters"
+  //     body: "*"
+  //   };
+  // }
 
   rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
     option (audit_log_description).description = "get all email filters";
