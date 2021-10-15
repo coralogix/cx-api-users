@@ -38,7 +38,7 @@ message ExternalTokenData {
   google.protobuf.StringValue token = 2;
   google.protobuf.StringValue id = 3;
   google.protobuf.StringValue config = 4;
-  google.protobuf.Timestamp   createdAt = 5;
+  google.protobuf.Timestamp   created_at = 5;
 }
 
 message ExternalIntegrationConfigWithData {
@@ -50,7 +50,7 @@ message ExternalIntegrationConfigWithData {
 message ExternalIntegrationConfig {
   SourceSystem                 source_system = 1;
   ExternalKeyType              type = 2;
-  google.protobuf.BoolValue    isActive = 3;
+  google.protobuf.BoolValue    is_active = 3;
   google.protobuf.StringValue  id = 4;
 }
 

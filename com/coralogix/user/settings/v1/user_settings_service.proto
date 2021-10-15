@@ -77,17 +77,6 @@ service UserSettingsService {
     };
   }
 
-  // TODO - document it somewhere - this is dummy endpoiont, I have created model just to know that it does not even work on dev
-  //   It should be in `query archive API` based on:
-  //   https://coralogix.atlassian.net/wiki/spaces/ZA/pages/2429747201/Webapi+routes+per+feature+cx-product
-  // rpc TestGetArchiveProviders(TestGetArchiveProvidersRequest) returns (TestGetArchiveProvidersResponse) {
-  //   option (audit_log_description).description = "test get archive providers";
-  //   option (google.api.http) = {
-  //     get: "/api/v1/testGetFilters"
-  //     body: "*"
-  //   };
-  // }
-
   rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
     option (audit_log_description).description = "get all email filters";
     option (google.api.http) = {
@@ -197,53 +186,53 @@ message GenerateNewTeamsApiKeyForUserResponse{
 message GetAllExternalTokensRequest{}
 
 message GetAllExternalTokensResponse{
-  ExternalIntegrationConfigWithData   Slack = 1 [
+  ExternalIntegrationConfigWithData   slack = 1 [
     (source_system_option) = SOURCE_SYSTEM_SLACK,
     (type_option) = EXTERNAL_KEY_TYPE_TOKEN
   ];
-  ExternalIntegrationConfigWithData   AwsSns = 2;
+  ExternalIntegrationConfigWithData   aws_sns = 2;
   // 			sourceSystem: 'AwsSns',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData   Bitbucket = 3;
+  ExternalIntegrationConfigWithData   bitbucket = 3;
   // 			sourceSystem: 'Bitbucket',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData	  GitHub = 4;
+  ExternalIntegrationConfigWithData	  git_hub = 4;
   // 			sourceSystem: 'GitHub',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData		GitLab = 5;
+  ExternalIntegrationConfigWithData		git_lab = 5;
   // 			sourceSystem: 'GitLab',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData   PagerDuty = 6;
+  ExternalIntegrationConfigWithData   pager_duty = 6;
   // 			sourceSystem: 'PagerDuty',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData   Opsgenie = 7;
+  ExternalIntegrationConfigWithData   opsgenie = 7;
   // 			sourceSystem: 'Opsgenie',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData   Prometheus = 8;
+  ExternalIntegrationConfigWithData   orometheus = 8;
   // 			sourceSystem: 'Prometheus',
   // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfig            AWS = 9;
+  ExternalIntegrationConfig            a_w_s = 9;
   // 			sourceSystem: 'AWS',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  ExternalIntegrationConfig           GCP = 10;
+  ExternalIntegrationConfig           g_c_p = 10;
   // 			sourceSystem: 'GCP',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  ExternalIntegrationConfig           Azure = 11;
+  ExternalIntegrationConfig           azure = 11;
   // 			sourceSystem: 'Azure',
   // 			type: externalKeysTypes.FLAG,
   // 			active: false,
   // 			id: ''
-  ExternalIntegrationConfigWithData   Statuspage = 12;
+  ExternalIntegrationConfigWithData   statuspage = 12;
   // 			sourceSystem: 'Statuspage',
   // 			type: externalKeysTypes.STATUSPAGE,
-  ExternalIntegrationConfigWithData   Cloudflare = 13;
+  ExternalIntegrationConfigWithData   cloudflare = 13;
   // 			sourceSystem: 'Cloudflare',
   // 			type: externalKeysTypes.CLOUDFLARE,
-  ExternalIntegrationConfigWithData   Intercom = 14;
+  ExternalIntegrationConfigWithData   intercom = 14;
   // 			sourceSystem: 'Intercom',
   // 			type: externalKeysTypes.INTERCOM,
 }
@@ -307,7 +296,8 @@ message DeleteEmailFilterRequest{
   google.protobuf.UInt32Value id = 1;
 }
 message DeleteEmailFilterResponse{
-  google.protobuf.BoolValue deleted = 1;
+  google.protobuf.BoolValue   deleted = 1;
+  google.protobuf.UInt32Value id = 2;
 }
 
 message UpdateUserSettingsRequest{
