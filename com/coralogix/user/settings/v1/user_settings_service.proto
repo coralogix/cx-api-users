@@ -301,10 +301,10 @@ message DeleteEmailFilterResponse{
 }
 
 message UpdateUserSettingsRequest{
-  UserSettings user_settings = 1;
+  google.protobuf.StringValue data = 1;
 }
 message UpdateUserSettingsResponse{
-  UserSettings user_settings = 1;
+  google.protobuf.StringValue data = 1;
 }
 
 message GetUserSettingsRequest{}
