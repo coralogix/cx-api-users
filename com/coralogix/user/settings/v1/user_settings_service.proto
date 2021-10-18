@@ -325,7 +325,9 @@ message AddNewLogColumnResponse{
   LogColumn log_column = 1;
 }
 
-message DeleteLogColumnRequest{}
+message DeleteLogColumnRequest{
+  google.protobuf.UInt32Value id = 1;
+}
 message DeleteLogColumnResponse{}
 
 message GetDigestsRequest{}
