@@ -186,55 +186,20 @@ message GenerateNewTeamsApiKeyForUserResponse{
 message GetAllExternalTokensRequest{}
 
 message GetAllExternalTokensResponse{
-  ExternalIntegrationConfigWithData   slack = 1 [
-    (source_system_option) = SOURCE_SYSTEM_SLACK,
-    (type_option) = EXTERNAL_KEY_TYPE_TOKEN
-  ];
+  ExternalIntegrationConfigWithData   slack = 1 ;
   ExternalIntegrationConfigWithData   aws_sns = 2;
-  // 			sourceSystem: 'AwsSns',
-  // 			type: externalKeysTypes.TOKEN,
   ExternalIntegrationConfigWithData   bitbucket = 3;
-  // 			sourceSystem: 'Bitbucket',
-  // 			type: externalKeysTypes.TOKEN,
   ExternalIntegrationConfigWithData	  git_hub = 4;
-  // 			sourceSystem: 'GitHub',
-  // 			type: externalKeysTypes.TOKEN,
   ExternalIntegrationConfigWithData		git_lab = 5;
-  // 			sourceSystem: 'GitLab',
-  // 			type: externalKeysTypes.TOKEN,
   ExternalIntegrationConfigWithData   pager_duty = 6;
-  // 			sourceSystem: 'PagerDuty',
-  // 			type: externalKeysTypes.TOKEN,
   ExternalIntegrationConfigWithData   opsgenie = 7;
-  // 			sourceSystem: 'Opsgenie',
-  // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfigWithData   orometheus = 8;
-  // 			sourceSystem: 'Prometheus',
-  // 			type: externalKeysTypes.TOKEN,
-  ExternalIntegrationConfig            a_w_s = 9;
-  // 			sourceSystem: 'AWS',
-  // 			type: externalKeysTypes.FLAG,
-  // 			active: false,
-  // 			id: ''
+  ExternalIntegrationConfigWithData   prometheus = 8;
+  ExternalIntegrationConfig           a_w_s = 9;
   ExternalIntegrationConfig           g_c_p = 10;
-  // 			sourceSystem: 'GCP',
-  // 			type: externalKeysTypes.FLAG,
-  // 			active: false,
-  // 			id: ''
   ExternalIntegrationConfig           azure = 11;
-  // 			sourceSystem: 'Azure',
-  // 			type: externalKeysTypes.FLAG,
-  // 			active: false,
-  // 			id: ''
   ExternalIntegrationConfigWithData   statuspage = 12;
-  // 			sourceSystem: 'Statuspage',
-  // 			type: externalKeysTypes.STATUSPAGE,
   ExternalIntegrationConfigWithData   cloudflare = 13;
-  // 			sourceSystem: 'Cloudflare',
-  // 			type: externalKeysTypes.CLOUDFLARE,
   ExternalIntegrationConfigWithData   intercom = 14;
-  // 			sourceSystem: 'Intercom',
-  // 			type: externalKeysTypes.INTERCOM,
 }
 
 message CreateExternalTokenRequest{
