@@ -120,7 +120,7 @@ service UserSettingsService {
   rpc GetUserSettings(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
     option (audit_log_description).description = "get user settings";
     option (google.api.http) = {
-      delete: "/api/v1/user/settings"
+      get: "/api/v1/user/settings"
       body: "user_settings"
     };
   }
