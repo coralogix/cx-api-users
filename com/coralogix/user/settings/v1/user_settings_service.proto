@@ -26,7 +26,6 @@ service UserSettingsService {
     option (audit_log_description).description = "generate new api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/api_key"
-      body: "user_settings"
     };
   }
 
@@ -34,7 +33,6 @@ service UserSettingsService {
     option (audit_log_description).description = "generate new es-api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/es_api_key"
-      body: "user_settings"
     };
   }
 
@@ -42,7 +40,6 @@ service UserSettingsService {
     option (audit_log_description).description = "generate new team-api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/teams_api_key"
-      body: "user_settings"
     };
   }
 
@@ -50,7 +47,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get all external tokens";
     option (google.api.http) = {
       get: "/api/v1/user/external-tokens"
-      body: "external_integration_configs"
     };
   }
 
@@ -58,7 +54,7 @@ service UserSettingsService {
     option (audit_log_description).description = "create external token";
     option (google.api.http) = {
       post: "/api/v1/user/external-tokens"
-      body: "external_integration_config"
+      body: "*"
     };
   }
 
@@ -66,14 +62,15 @@ service UserSettingsService {
     option (audit_log_description).description = "update external token";
     option (google.api.http) = {
       put: "/api/v1/user/external-tokens/{tokenId}"
-      body: "external_integration_config"
+      body: "*"
     };
   }
 
   rpc DeleteExternalToken(DeleteExternalTokenRequest) returns (DeleteExternalTokenResponse) {
     option (audit_log_description).description = "delete external token";
     option (google.api.http) = {
-      delete: "/api/v1/user/external-tokens/{tokenId}"
+      delete: "/api/v1/user/external-tokens/{token_id}"
+      body: "*"
     };
   }
 
@@ -81,7 +78,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get all email filters";
     option (google.api.http) = {
       get: "/api/v1/emailFilters"
-      body: "*"
     };
   }
 
@@ -89,7 +85,7 @@ service UserSettingsService {
     option (audit_log_description).description = "add email filter";
     option (google.api.http) = {
       post: "/api/v1/emailFilters"
-      body: "email_filter_definition"
+      body: "*"
     };
   }
 
@@ -97,7 +93,7 @@ service UserSettingsService {
     option (audit_log_description).description = "update email filter";
     option (google.api.http) = {
       post: "/api/v1/emailFilters/edit"
-      body: "email_filter_definition"
+      body: "*"
     };
   }
 
@@ -105,7 +101,7 @@ service UserSettingsService {
     option (audit_log_description).description = "delete email filter";
     option (google.api.http) = {
       delete: "/api/v1/emailFilters/{id}"
-      body: "deleted"
+      body: "*"
     };
   }
 
@@ -113,7 +109,7 @@ service UserSettingsService {
     option (audit_log_description).description = "update user settings";
     option (google.api.http) = {
       post: "/api/v1/user/settings"
-      body: "user_settings"
+      body: "*"
     };
   }
 
@@ -121,7 +117,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get user settings";
     option (google.api.http) = {
       get: "/api/v1/user/settings"
-      body: "user_settings"
     };
   }
 
@@ -129,7 +124,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get all log columns";
     option (google.api.http) = {
       get: "/api/v1/user/logColumn"
-      body: "log_columns"
     };
   }
 
@@ -137,7 +131,7 @@ service UserSettingsService {
     option (audit_log_description).description = "add new log column";
     option (google.api.http) = {
       post: "/api/v1/user/logColumn"
-      body: "log_column"
+      body: "*"
     };
   }
 
@@ -152,7 +146,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get digests";
     option (google.api.http) = {
       get: "/api/v1/digests"
-      body: "digests"
     };
   }
 
@@ -209,7 +202,7 @@ message CreateExternalTokenRequest{
   google.protobuf.StringValue token = 4;
 }
 message CreateExternalTokenResponse{
-  ExternalIntegrationConfig external_integration_config = 1;
+  SingleExternalIntegrationConfig external_integration_config = 1;
 }
 
 message UpdateExternalTokenRequest{
@@ -217,7 +210,7 @@ message UpdateExternalTokenRequest{
   google.protobuf.StringValue token = 2;
 }
 message UpdateExternalTokenResponse{
-  ExternalIntegrationConfig external_integration_config = 1;
+  SingleExternalIntegrationConfig external_integration_config = 1;
 }
 
 message DeleteExternalTokenRequest{
@@ -304,7 +297,7 @@ message UpdateDigestsRequest{
   google.protobuf.UInt32Value id = 1;
   google.protobuf.BoolValue   enabled = 2;
 }
-// TODO make sure it is compatible, previous response looked like this [null,1]
+
 message UpdateDigestsResponse{
   google.protobuf.BoolValue updated = 1;
 }

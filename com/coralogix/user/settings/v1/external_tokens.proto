@@ -41,6 +41,18 @@ message ExternalTokenData {
   google.protobuf.Timestamp   created_at = 5;
 }
 
+
+message SingleExternalIntegrationConfig {
+  google.protobuf.StringValue id =1;
+  google.protobuf.UInt32Value companyId = 2;
+  google.protobuf.StringValue name = 3;
+  SourceSystem                sourceSystem = 4;
+  google.protobuf.StringValue token = 5;
+  google.protobuf.StringValue config = 6;
+  google.protobuf.Timestamp   createdAt = 7;
+  google.protobuf.Timestamp   updatedAt = 8;
+}
+
 message ExternalIntegrationConfigWithData {
   SourceSystem                 source_system = 1;
   ExternalKeyType              type = 2;
