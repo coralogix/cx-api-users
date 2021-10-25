@@ -9,6 +9,7 @@ import "com/coralogix/user/settings/v1/external_tokens.proto";
 import "com/coralogix/user/settings/v1/user_settings.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -159,13 +160,13 @@ message GetAllExternalTokensResponse{
   ExternalIntegrationConfigWithData   slack = 1 ;
   ExternalIntegrationConfigWithData   aws_sns = 2;
   ExternalIntegrationConfigWithData   bitbucket = 3;
-  ExternalIntegrationConfigWithData	  git_hub = 4;
-  ExternalIntegrationConfigWithData		git_lab = 5;
+  ExternalIntegrationConfigWithData   git_hub = 4;
+  ExternalIntegrationConfigWithData   git_lab = 5;
   ExternalIntegrationConfigWithData   pager_duty = 6;
   ExternalIntegrationConfigWithData   opsgenie = 7;
   ExternalIntegrationConfigWithData   prometheus = 8;
-  ExternalIntegrationConfig           a_w_s = 9;
-  ExternalIntegrationConfig           g_c_p = 10;
+  ExternalIntegrationConfig           aws = 9;
+  ExternalIntegrationConfig           gcp = 10;
   ExternalIntegrationConfig           azure = 11;
   ExternalIntegrationConfigWithData   statuspage = 12;
   ExternalIntegrationConfigWithData   cloudflare = 13;
@@ -175,7 +176,7 @@ message GetAllExternalTokensResponse{
 message CreateExternalTokenRequest{
   google.protobuf.StringValue name = 1;
   SourceSystem                source_system = 2;
-  google.protobuf.StringValue config = 3; // Json
+  google.protobuf.StringValue config = 3; // TODO - make it Struct
   google.protobuf.StringValue token = 4;
 }
 message CreateExternalTokenResponse{

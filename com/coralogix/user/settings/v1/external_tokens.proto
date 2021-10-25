@@ -3,8 +3,9 @@ syntax = "proto3";
 package com.coralogix.user.settings.v1;
 
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 enum SourceSystem {
   SOURCE_SYSTEM_UNSPECIFIED = 0;
@@ -74,5 +75,5 @@ extend google.protobuf.FieldOptions {
 message UpdateExternalTokenData {
   google.protobuf.StringValue name = 1;
   google.protobuf.StringValue token = 2; // UUID
-  google.protobuf.StringValue config = 3; // Json
+  google.protobuf.StringValue config = 3; // TODO - make it Struct
 }
