@@ -6,7 +6,6 @@ import "com/coralogix/user/settings/v1/archiving_provider.proto";
 import "com/coralogix/user/settings/v1/digest.proto";
 import "com/coralogix/user/settings/v1/email_filter.proto";
 import "com/coralogix/user/settings/v1/external_tokens.proto";
-import "com/coralogix/user/settings/v1/log_column.proto";
 import "com/coralogix/user/settings/v1/user_settings.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
@@ -117,28 +116,6 @@ service UserSettingsService {
     option (audit_log_description).description = "get user settings";
     option (google.api.http) = {
       get: "/api/v1/user/settings"
-    };
-  }
-
-  rpc GetAllLogColumns(GetAllLogColumnsRequest) returns (GetAllLogColumnsResponse) {
-    option (audit_log_description).description = "get all log columns";
-    option (google.api.http) = {
-      get: "/api/v1/user/logColumn"
-    };
-  }
-
-  rpc AddNewLogColumn(AddNewLogColumnRequest) returns (AddNewLogColumnResponse) {
-    option (audit_log_description).description = "add new log column";
-    option (google.api.http) = {
-      post: "/api/v1/user/logColumn"
-      body: "*"
-    };
-  }
-
-  rpc DeleteLogColumn(DeleteLogColumnRequest) returns (DeleteLogColumnResponse) {
-    option (audit_log_description).description = "delete log column";
-    option (google.api.http) = {
-      delete: "/api/v1/user/logColumn/{id}"
     };
   }
 
@@ -269,24 +246,6 @@ message GetUserSettingsRequest{}
 message GetUserSettingsResponse{
   UserSettings user_settings = 1;
 }
-
-message GetAllLogColumnsRequest{}
-message GetAllLogColumnsResponse{
-  repeated LogColumn log_columns = 1;
-}
-
-message AddNewLogColumnRequest{
-  google.protobuf.StringValue header_name = 1;
-  google.protobuf.StringValue field_name = 2;
-}
-message AddNewLogColumnResponse{
-  LogColumn log_column = 1;
-}
-
-message DeleteLogColumnRequest{
-  google.protobuf.UInt32Value id = 1;
-}
-message DeleteLogColumnResponse{}
 
 message GetDigestsRequest{}
 message GetDigestsResponse{
