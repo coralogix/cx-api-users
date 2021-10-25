@@ -70,3 +70,9 @@ extend google.protobuf.FieldOptions {
   SourceSystem    source_system_option = 10001;
   ExternalKeyType type_option = 10002;
 }
+
+message UpdateExternalTokenData {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue token = 2; // UUID
+  google.protobuf.StringValue config = 3; // Json
+}

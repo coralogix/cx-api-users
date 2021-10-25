@@ -184,7 +184,7 @@ message CreateExternalTokenResponse{
 
 message UpdateExternalTokenRequest{
   google.protobuf.StringValue token_id = 1;
-  google.protobuf.StringValue token = 2;
+  UpdateExternalTokenData     data = 2;
 }
 message UpdateExternalTokenResponse{
   SingleExternalIntegrationConfig external_integration_config = 1;
