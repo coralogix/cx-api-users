@@ -55,6 +55,7 @@ service UserSettingsService {
     option (google.api.http) = {
       post: "/api/v1/user/external-tokens"
       body: "*"
+      response_body: "external_integration_config"
     };
   }
 
@@ -63,6 +64,7 @@ service UserSettingsService {
     option (google.api.http) = {
       put: "/api/v1/user/external-tokens/{tokenId}"
       body: "*"
+      response_body: "external_integration_config"
     };
   }
 
@@ -86,6 +88,7 @@ service UserSettingsService {
     option (google.api.http) = {
       post: "/api/v1/emailFilters"
       body: "*"
+      response_body: "email_filter_definition"
     };
   }
 
@@ -94,6 +97,7 @@ service UserSettingsService {
     option (google.api.http) = {
       post: "/api/v1/emailFilters/edit"
       body: "*"
+      response_body: "email_filter_definition"
     };
   }
 
