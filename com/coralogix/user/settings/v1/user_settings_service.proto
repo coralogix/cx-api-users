@@ -176,7 +176,7 @@ message GetAllExternalTokensResponse{
 message CreateExternalTokenRequest{
   google.protobuf.StringValue name = 1;
   SourceSystem                source_system = 2;
-  google.protobuf.StringValue config = 3; // TODO - make it Struct
+  google.protobuf.Struct      config = 3;
   google.protobuf.StringValue token = 4;
 }
 message CreateExternalTokenResponse{
