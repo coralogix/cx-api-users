@@ -2,56 +2,48 @@ syntax = "proto3";
 
 package com.coralogix.user.settings.v1;
 
+import "com/coralogix/user/settings/audit_log_description.proto";
 import "com/coralogix/user/settings/v1/archiving_provider.proto";
 import "com/coralogix/user/settings/v1/digest.proto";
 import "com/coralogix/user/settings/v1/email_filter.proto";
 import "com/coralogix/user/settings/v1/external_tokens.proto";
 import "com/coralogix/user/settings/v1/user_settings.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-message AuditLogDescription {
-  optional string description = 1;
-}
-
-extend google.protobuf.MethodOptions {
-  AuditLogDescription audit_log_description = 5000;
-}
-
 service UserSettingsService {
   rpc GenerateNewApiKeyForUser(GenerateNewApiKeyForUserRequest) returns (GenerateNewApiKeyForUserResponse) {
-    option (audit_log_description).description = "generate new api key for user";
+    option (com.coralogix.user.settings.audit_log_description).description = "generate new api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/api_key"
     };
   }
 
   rpc GenerateNewEsApiKeyForUser(GenerateNewEsApiKeyForUserRequest) returns (GenerateNewEsApiKeyForUserResponse) {
-    option (audit_log_description).description = "generate new es-api key for user";
+    option (com.coralogix.user.settings.audit_log_description).description = "generate new es-api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/es_api_key"
     };
   }
 
   rpc GenerateNewTeamsApiKeyForUser(GenerateNewTeamsApiKeyForUserRequest) returns (GenerateNewTeamsApiKeyForUserResponse) {
-    option (audit_log_description).description = "generate new team-api key for user";
+    option (com.coralogix.user.settings.audit_log_description).description = "generate new team-api key for user";
     option (google.api.http) = {
       post: "/api/v1/user/settings/teams_api_key"
     };
   }
 
   rpc GetAllExternalTokens(GetAllExternalTokensRequest) returns (GetAllExternalTokensResponse) {
-    option (audit_log_description).description = "get all external tokens";
+    option (com.coralogix.user.settings.audit_log_description).description = "get all external tokens";
     option (google.api.http) = {
       get: "/api/v1/user/external-tokens"
     };
   }
 
   rpc CreateExternalToken(CreateExternalTokenRequest) returns (CreateExternalTokenResponse) {
-    option (audit_log_description).description = "create external token";
+    option (com.coralogix.user.settings.audit_log_description).description = "create external token";
     option (google.api.http) = {
       post: "/api/v1/user/external-tokens"
       body: "*"
@@ -60,7 +52,7 @@ service UserSettingsService {
   }
 
   rpc UpdateExternalToken(UpdateExternalTokenRequest) returns (UpdateExternalTokenResponse) {
-    option (audit_log_description).description = "update external token";
+    option (com.coralogix.user.settings.audit_log_description).description = "update external token";
     option (google.api.http) = {
       put: "/api/v1/user/external-tokens/{tokenId}"
       body: "*"
@@ -69,7 +61,7 @@ service UserSettingsService {
   }
 
   rpc DeleteExternalToken(DeleteExternalTokenRequest) returns (DeleteExternalTokenResponse) {
-    option (audit_log_description).description = "delete external token";
+    option (com.coralogix.user.settings.audit_log_description).description = "delete external token";
     option (google.api.http) = {
       delete: "/api/v1/user/external-tokens/{token_id}"
       body: "*"
@@ -77,14 +69,14 @@ service UserSettingsService {
   }
 
   rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
-    option (audit_log_description).description = "get all email filters";
+    option (com.coralogix.user.settings.audit_log_description).description = "get all email filters";
     option (google.api.http) = {
       get: "/api/v1/emailFilters"
     };
   }
 
   rpc AddEmailFilter(AddEmailFilterRequest) returns (AddEmailFilterResponse) {
-    option (audit_log_description).description = "add email filter";
+    option (com.coralogix.user.settings.audit_log_description).description = "add email filter";
     option (google.api.http) = {
       post: "/api/v1/emailFilters"
       body: "*"
@@ -93,7 +85,7 @@ service UserSettingsService {
   }
 
   rpc UpdateEmailFilter(UpdateEmailFilterRequest) returns (UpdateEmailFilterResponse) {
-    option (audit_log_description).description = "update email filter";
+    option (com.coralogix.user.settings.audit_log_description).description = "update email filter";
     option (google.api.http) = {
       post: "/api/v1/emailFilters/edit"
       body: "*"
@@ -102,7 +94,7 @@ service UserSettingsService {
   }
 
   rpc DeleteEmailFilter(DeleteEmailFilterRequest) returns (DeleteEmailFilterResponse) {
-    option (audit_log_description).description = "delete email filter";
+    option (com.coralogix.user.settings.audit_log_description).description = "delete email filter";
     option (google.api.http) = {
       delete: "/api/v1/emailFilters/{id}"
       body: "*"
@@ -110,7 +102,7 @@ service UserSettingsService {
   }
 
   rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UpdateUserSettingsResponse) {
-    option (audit_log_description).description = "update user settings";
+    option (com.coralogix.user.settings.audit_log_description).description = "update user settings";
     option (google.api.http) = {
       post: "/api/v1/user/settings"
       body: "*"
@@ -118,21 +110,21 @@ service UserSettingsService {
   }
 
   rpc GetUserSettings(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
-    option (audit_log_description).description = "get user settings";
+    option (com.coralogix.user.settings.audit_log_description).description = "get user settings";
     option (google.api.http) = {
       get: "/api/v1/user/settings"
     };
   }
 
   rpc GetDigests(GetDigestsRequest) returns (GetDigestsResponse) {
-    option (audit_log_description).description = "get digests";
+    option (com.coralogix.user.settings.audit_log_description).description = "get digests";
     option (google.api.http) = {
       get: "/api/v1/digests"
     };
   }
 
   rpc UpdateDigests(UpdateDigestsRequest) returns (UpdateDigestsResponse) {
-    option (audit_log_description).description = "update digests";
+    option (com.coralogix.user.settings.audit_log_description).description = "update digests";
     option (google.api.http) = {
       post: "/api/v1/digests"
       body: "*"

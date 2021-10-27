@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.coralogix.user.settings.v2;
+
+import "com/coralogix/user/settings/audit_log_description.proto";
+import "com/coralogix/user/settings/v2/user.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+service UserSettingsService {
+  rpc GetUser(GetUserSettingsRequest) returns (GetUserSettingsResponse) {
+    option (com.coralogix.user.settings.audit_log_description).description = "todo";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/todo"
+    };
+  }
+
+  rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UpdateUserSettingsResponse) {
+    option (com.coralogix.user.settings.audit_log_description).description = "todo";
+    option (google.api.http) = {
+      post: "/api/v1/user/settings/todo"
+    };
+  }
+};
+
+message GetUserSettingsRequest {}
+message GetUserSettingsResponse {
+    User user = 1;
+}
+
+message UpdateUserSettingsRequest {
+    User user = 1;
+}
+message UpdateUserSettingsResponse {
+    User user = 1;
+}
