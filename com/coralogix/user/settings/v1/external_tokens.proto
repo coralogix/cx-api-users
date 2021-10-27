@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package com.coralogix.user.settings.v1;
 
-import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -65,11 +64,6 @@ message ExternalIntegrationConfig {
   ExternalKeyType              type = 2;
   google.protobuf.BoolValue    is_active = 3;
   google.protobuf.StringValue  id = 4;
-}
-
-extend google.protobuf.FieldOptions {
-  SourceSystem    source_system_option = 10001;
-  ExternalKeyType type_option = 10002;
 }
 
 message UpdateExternalTokenData {
