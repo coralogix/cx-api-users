@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.coralogix.users.v2;
+
+import "com/coralogix/users/v2/audit_log_description.proto";
+import "com/coralogix/users/v2/user.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (audit_log_description).description = "Get all user settings";
+    option (google.api.http) = {
+      get: "/api/v1/users"
+    };
+  }
+
+  // TODO what does it mean if we send empty tokens - does it mean we want them deleted or preserved as is?
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+    option (audit_log_description).description = "Update all user settings";
+    option (google.api.http) = {
+      post: "/api/v1/users"
+    };
+  }
+};
+
+message GetUserRequest {}
+message GetUserResponse {
+    User user = 1;
+}
+
+// TODO do we want to have custom type here? Or are we ok with User all over the place.
+message UpdateUserRequest {
+    User user = 1;
+}
+message UpdateUserResponse {
+    User user = 1;
+}
