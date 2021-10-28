@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package com.coralogix.users.v2;
+package com.coralogix.users.v2beta1;
 
-import "com/coralogix/users/v2/audit_log_description.proto";
-import "com/coralogix/users/v2/user.proto";
+import "com/coralogix/users/v2beta1/audit_log_description.proto";
+import "com/coralogix/users/v2beta1/user.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 
@@ -20,6 +20,7 @@ service UserService {
     option (audit_log_description).description = "Update all user settings";
     option (google.api.http) = {
       post: "/api/v1/users"
+      body: "user"
     };
   }
 };

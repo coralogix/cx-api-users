@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.coralogix.users.v2;
+package com.coralogix.users.v2beta1;
 
 import "google/protobuf/descriptor.proto";
 
