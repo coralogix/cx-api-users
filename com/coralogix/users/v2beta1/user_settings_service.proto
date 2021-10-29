@@ -11,7 +11,7 @@ service UserService {
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
     option (audit_log_description).description = "Get all user settings";
     option (google.api.http) = {
-      get: "/api/v1/users"
+      get: "/api/v2/users"
     };
   }
 
@@ -19,7 +19,7 @@ service UserService {
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
     option (audit_log_description).description = "Update all user settings";
     option (google.api.http) = {
-      post: "/api/v1/users"
+      post: "/api/v2/users"
       body: "user"
     };
   }
