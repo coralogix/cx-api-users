@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package com.coralogix.users.v2beta1;
+
+import "com/coralogix/users/v2beta1/api_key.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  AuditLogDescription audit_log_description = 5001;
+}
+
+service ApiKeysService {
+  // Do we wan to keep this, or make apiKeys read once as they should be?
+  rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
+    option (audit_log_description).description = "Get single api key";
+    option (google.api.http) = {
+      get: "/api/v1/api_key/{id}"
+    };
+  }
+
+  rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
+    option (audit_log_description).description = "Update all user settings";
+    option (google.api.http) = {
+      post: "/api/v2/users"
+      body: "user"
+    };
+  }
+
+  rpc RevokeApiKey(RevokeApiKeyRequest) returns (RevokeApiKeyResponse) {
+    option (audit_log_description).description = "Update all user settings";
+    option (google.api.http) = {
+      post: "/api/v2/users"
+      body: "user"
+    };
+  }
+};
+
+message GetApiKeyRequest{
+  ApiKeyType type =1;
+  oneof id {
+    google.protobuf.StringValue user_id =2;
+    google.protobuf.StringValue company_id =3;
+  }
+  // This would be sufficient, but we do not have it in the model
+  // google.protobuf.StringValue api_key_id = 1;
+}
+
+message GetApiKeyResponse{
+  ApiKey api_key = 1;
+}
+
+message CreateApiKeyRequest{
+  ApiKey.Data api_key_data = 1;
+}
+message CreateApiKeyResponse{
+  ApiKey api_key = 1;
+}
+
+message RevokeApiKeyRequest{
+  google.protobuf.StringValue key_id = 1;
+}
+message RevokeApiKeyResponse{
+  google.protobuf.BoolValue revokes = 1;
+}

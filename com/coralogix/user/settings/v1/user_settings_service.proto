@@ -2,16 +2,24 @@ syntax = "proto3";
 
 package com.coralogix.user.settings.v1;
 
-import "com/coralogix/user/settings/v1/audit_log_description.proto";
 import "com/coralogix/user/settings/v1/archiving_provider.proto";
 import "com/coralogix/user/settings/v1/digest.proto";
 import "com/coralogix/user/settings/v1/email_filter.proto";
 import "com/coralogix/user/settings/v1/external_tokens.proto";
 import "com/coralogix/user/settings/v1/user_settings.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  AuditLogDescription audit_log_description = 5000;
+}
 
 service UserSettingsService {
   rpc GenerateNewApiKeyForUser(GenerateNewApiKeyForUserRequest) returns (GenerateNewApiKeyForUserResponse) {
