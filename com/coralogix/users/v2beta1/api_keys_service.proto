@@ -17,28 +17,29 @@ extend google.protobuf.MethodOptions {
 
 service ApiKeysService {
   // Do we wan to keep this, or make apiKeys read once as they should be?
-  rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
-    option (audit_log_description).description = "Get single api key";
-    option (google.api.http) = {
-      get: "/api/v1/api_key/{id}"
-    };
-  }
+  // rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
+  //   option (audit_log_description).description = "Get single api key";
+  //   option (google.api.http) = {
+  //     get: "/api/v1/api_key/{id}"
+  //   };
+  // }
 
   rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     option (audit_log_description).description = "Update all user settings";
     option (google.api.http) = {
-      post: "/api/v2/users"
-      body: "user"
+      post: "/api/v2/users/api_key" // Not sure if it should be like this or just `/api/v1/api_key`
+      body: "api_key"
     };
   }
 
-  rpc RevokeApiKey(RevokeApiKeyRequest) returns (RevokeApiKeyResponse) {
-    option (audit_log_description).description = "Update all user settings";
-    option (google.api.http) = {
-      post: "/api/v2/users"
-      body: "user"
-    };
-  }
+  // Future improvement
+  // rpc RevokeApiKey(RevokeApiKeyRequest) returns (RevokeApiKeyResponse) {
+  //   option (audit_log_description).description = "Update all user settings";
+  //   option (google.api.http) = {
+  //     post: "/api/v2/users/api_key/{key_id}/revoke"
+  //     body: "key_id"
+  //   };
+  // }
 };
 
 message GetApiKeyRequest{

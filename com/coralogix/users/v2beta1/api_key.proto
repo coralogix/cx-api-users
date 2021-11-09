@@ -11,19 +11,15 @@ enum ApiKeyType {
   API_KEY_TYPE_TEAMS_API_KEY =3;
 }
 
-message CretateApiKey {
-  ApiKeyType type = 2;
-}
-
 message UserApiKey{
-  ApiKeyType type = 1;
+  ApiKeyType key_type = 1;
   google.protobuf.StringValue user_id = 2;
   // Optional - if not specified it is server generated
   google.protobuf.StringValue token_value = 3;
 }
 
 message CompanyApiKey{
-  ApiKeyType type = 1;
+  ApiKeyType key_type = 1;
   google.protobuf.StringValue company_id = 2;
   // Optional - if not specified it is server generated
   google.protobuf.StringValue token_value = 3;
