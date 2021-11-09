@@ -9,8 +9,8 @@ import "google/protobuf/wrappers.proto";
 
 enum SourceSystem {
   SOURCE_SYSTEM_UNSPECIFIED = 0;
-  SOURCE_SYSTEM_GITHUB = 1;
-  SOURCE_SYSTEM_GITLAB = 2;
+  SOURCE_SYSTEM_GIT_HUB = 1;
+  SOURCE_SYSTEM_GIT_LAB = 2;
   SOURCE_SYSTEM_PAGERDUTY = 3;
   SOURCE_SYSTEM_BITBUCKET = 4;
   SOURCE_SYSTEM_PROMETHEUS = 5;
@@ -63,7 +63,7 @@ message ExternalIntegrationConfigWithData {
 message ExternalIntegrationConfig {
   SourceSystem                 source_system = 1;
   ExternalKeyType              type = 2;
-  google.protobuf.BoolValue    is_active = 3;
+  google.protobuf.BoolValue    active = 3;
   google.protobuf.StringValue  id = 4;
 }
 
