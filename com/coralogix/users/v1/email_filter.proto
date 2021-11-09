@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.coralogix.user.settings.v1;
+package com.coralogix.users.v1;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
