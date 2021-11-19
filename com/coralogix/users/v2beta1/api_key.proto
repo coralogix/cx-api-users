@@ -18,6 +18,7 @@ message UserApiKey{
   google.protobuf.StringValue token_value = 3;
 }
 
+// Not implemented/supported yet
 message CompanyApiKey{
   ApiKeyType key_type = 1;
   google.protobuf.StringValue company_id = 2;
@@ -26,7 +27,7 @@ message CompanyApiKey{
 }
 
 message ApiKey {
-  message ServerGenerate{
+  message ServerGenerated{
     google.protobuf.StringValue token_value = 1;
     // Future improvement - needs changes in the model
     // google.protobuf.StringValue id = 2;
@@ -37,7 +38,9 @@ message ApiKey {
     // google.protobuf.Timestamp   validTo = 1;
     oneof api_key {
       UserApiKey    user_api_key = 2;
-      CompanyApiKey company_api_key = 3;
+      CompanyApiKey company_api_key = 3; // Not implemented/supported yet
     }
   }
+  ServerGenerated server_generated = 1;
+  Data            data = 2;
 }
