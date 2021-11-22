@@ -28,7 +28,7 @@ service ApiKeysService {
     option (audit_log_description).description = "Create or generate api_key";
     option (google.api.http) = {
       post: "/api/v2/users/api_key" // Not sure if it should be like this or just `/api/v1/api_key`
-      body: "api_key"
+      body: "*"
     };
   }
 
