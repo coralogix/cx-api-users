@@ -1,4 +1,4 @@
-name: cx-api-user-settings
+name: cx-api-users
 CX_PRODUCT: apis
 deployable_type: library
 code_language: protobuf
