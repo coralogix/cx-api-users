@@ -16,44 +16,39 @@ extend google.protobuf.MethodOptions {
 }
 
 service ApiKeysService {
-  // Do we wan to keep this, or make apiKeys read once as they should be?
-  // rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
-  //   option (audit_log_description).description = "Get single api key";
-  //   option (google.api.http) = {
-  //     get: "/api/v1/api_key/{id}"
-  //   };
-  // }
+  rpc GetApiKeyMetadata(GetApiKeyMetadataRequest) returns (GetApiKeyMetadataResponse) {
+    option (audit_log_description).description = "Get api key metadata";
+    option (google.api.http) = {
+      post: "/api/users/v2/api-key/metadata"
+    };
+  }
 
   rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     option (audit_log_description).description = "Create or generate api_key";
     option (google.api.http) = {
-      post: "/api/v2/users/api_key" // Not sure if it should be like this or just `/api/v1/api_key`
+      post: "/api/users/v2/api-key"
       body: "*"
     };
   }
 
-  // Future improvement
-  // rpc RevokeApiKey(RevokeApiKeyRequest) returns (RevokeApiKeyResponse) {
-  //   option (audit_log_description).description = "Update all user settings";
-  //   option (google.api.http) = {
-  //     post: "/api/v2/users/api_key/{key_id}/revoke"
-  //     body: "key_id"
-  //   };
-  // }
+  rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
+    option (audit_log_description).description = "Delete api key";
+    option (google.api.http) = {
+      delete: "/api/users/v2/api-key"
+      body: "*"
+    };
+  }
 };
 
-message GetApiKeyRequest{
-  ApiKeyType api_key =1;
-  oneof id {
-    google.protobuf.StringValue user_id = 2;
-    google.protobuf.StringValue company_id = 3;
+message GetApiKeyMetadataRequest{
+  oneof api_key_type {
+    ApiKeyType user_api_key_type = 1;
+    ApiKeyType company_api_key_type = 2;
   }
-  // This would be sufficient, but we do not have it in the model
-  // google.protobuf.StringValue api_key_id = 1;
 }
 
-message GetApiKeyResponse{
-  ApiKey api_key = 1;
+message GetApiKeyMetadataResponse{
+  ApiKeyMetadata api_key_metadata = 1;
 }
 
 message CreateApiKeyRequest{
@@ -63,9 +58,16 @@ message CreateApiKeyResponse{
   ApiKey api_key = 1;
 }
 
-message RevokeApiKeyRequest{
-  google.protobuf.StringValue key_id = 1;
+message DeleteApiKeyRequest{
+  oneof api_key_type {
+    ApiKeyType user_api_key_type = 2;
+    ApiKeyType company_api_key_type = 3;
+  }
 }
-message RevokeApiKeyResponse{
-  google.protobuf.BoolValue revokes = 1;
+message DeleteApiKeyResponse{
+  google.protobuf.BoolValue deleted = 1;
+  oneof api_key_type {
+    ApiKeyType user_api_key_type = 2;
+    ApiKeyType company_api_key_type = 3;
+  }
 }
