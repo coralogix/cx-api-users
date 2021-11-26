@@ -20,6 +20,7 @@ service ApiKeysService {
     option (audit_log_description).description = "Get api key metadata";
     option (google.api.http) = {
       post: "/api/users/v2/api-key/metadata"
+      body: "*"
     };
   }
 
@@ -34,7 +35,7 @@ service ApiKeysService {
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
     option (audit_log_description).description = "Delete api key";
     option (google.api.http) = {
-      delete: "/api/users/v2/api-key"
+      post: "/api/users/v2/api-key/delete"
       body: "*"
     };
   }
