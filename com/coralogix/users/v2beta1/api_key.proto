@@ -31,7 +31,7 @@ message ApiKey {
   message ServerGenerated{
     google.protobuf.StringValue token_value = 1;
     google.protobuf.Int32Value  version = 2;
-    // Future improvement - needs changes in the backing DB model
+    // Future improvement - would need changes in the backing DB model
     // google.protobuf.StringValue id = 3;
   }
   message Data{
@@ -40,7 +40,7 @@ message ApiKey {
       UserApiKey    user_api_key = 2;
       CompanyApiKey company_api_key = 3; // Not implemented/supported yet
     }
-    // Future improvements - needs changes in the backing DB model
+    // Future improvements - would need changes in the backing DB model
     //   google.protobuf.StringValue name = 4;
     //   google.protobuf.Timestamp   validTo = 5;
   }
@@ -48,7 +48,7 @@ message ApiKey {
   Data            data = 2;
 }
 
-// More or less future improvement ad the created_at and updated_at same for all api keys now
+// More or less future improvement as the created_at and updated_at same for all api keys now
 message ApiKeyMetadata{
   google.protobuf.Timestamp created_at = 1;
   google.protobuf.Timestamp updated_at = 2;
