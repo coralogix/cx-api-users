@@ -244,7 +244,9 @@ message UpdateUserSettingsRequest{
   google.protobuf.Struct data = 1;
 }
 message UpdateUserSettingsResponse{
-  google.protobuf.Struct data = 1;
+  google.protobuf.Struct      data = 1;
+  google.protobuf.StringValue user_id = 2;
+  google.protobuf.BoolValue   updated = 3;
 }
 
 message GetUserSettingsRequest{}
