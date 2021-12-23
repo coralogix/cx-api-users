@@ -113,7 +113,7 @@ service UserSettingsService {
     option (audit_log_description).description = "update user settings";
     option (google.api.http) = {
       post: "/api/v1/user/settings"
-      body: "*"
+      body: "data"
     };
   }
 
