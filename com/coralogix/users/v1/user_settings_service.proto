@@ -241,10 +241,10 @@ message DeleteEmailFilterResponse{
 }
 
 message UpdateUserSettingsRequest{
-  google.protobuf.StringValue data = 1;
+  google.protobuf.Struct data = 1;
 }
 message UpdateUserSettingsResponse{
-  google.protobuf.StringValue data = 1;
+  google.protobuf.Struct data = 1;
 }
 
 message GetUserSettingsRequest{}
