@@ -1,0 +1,17 @@
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          event-type: protobuf_update
+          repository: coralogix/coralogix-sdk
+          client-payload:
+            repo: github.repository
+            version: github.ref_name
