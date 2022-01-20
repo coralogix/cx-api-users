@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "./users";
+option go_package = "com.coralogix/users/v1";
 
 package com.coralogix.users.v1;
 
