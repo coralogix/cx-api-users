@@ -175,7 +175,6 @@ message GetAllExternalTokensResponse{
   ExternalIntegrationConfigWithData   statuspage = 12;
   ExternalIntegrationConfigWithData   cloudflare = 13;
   ExternalIntegrationConfigWithData   intercom = 14;
-  ExternalIntegrationConfigWithData   okta = 15;
 }
 
 message CreateExternalTokenRequest{
