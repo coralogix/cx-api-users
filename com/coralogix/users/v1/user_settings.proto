@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option go_package = "com.coralogix/users/v1";
+
 package com.coralogix.users.v1;
 
 import "google/protobuf/wrappers.proto";
