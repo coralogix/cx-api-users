@@ -29,13 +29,6 @@ service UserSettingsService {
     };
   }
 
-  rpc GenerateNewEsApiKeyForUser(GenerateNewEsApiKeyForUserRequest) returns (GenerateNewEsApiKeyForUserResponse) {
-    option (audit_log_description).description = "generate new es-api key for user";
-    option (google.api.http) = {
-      post: "/api/v1/user/settings/es_api_key"
-    };
-  }
-
   rpc GenerateNewTeamsApiKeyForUser(GenerateNewTeamsApiKeyForUserRequest) returns (GenerateNewTeamsApiKeyForUserResponse) {
     option (audit_log_description).description = "generate new team-api key for user";
     option (google.api.http) = {
