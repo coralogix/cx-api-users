@@ -8,6 +8,6 @@ message UserSettings {
   google.protobuf.StringValue user_id = 1;
   google.protobuf.StringValue api_key = 2;
   google.protobuf.StringValue es_api_key = 3 [deprecated = true];
-  google.protobuf.StringValue teams_api_key = 4;
+  google.protobuf.StringValue teams_api_key = 4 [deprecated = true];
   google.protobuf.StringValue data = 5;
 }
