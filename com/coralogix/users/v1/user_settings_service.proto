@@ -21,13 +21,6 @@ extend google.protobuf.MethodOptions {
 }
 
 service UserSettingsService {
-  rpc GenerateNewApiKeyForUser(GenerateNewApiKeyForUserRequest) returns (GenerateNewApiKeyForUserResponse) {
-    option (audit_log_description).description = "generate new api key for user";
-    option (google.api.http) = {
-      post: "/api/v1/user/settings/api_key"
-    };
-  }
-
   rpc GetAllEmailFilters(GetAllEmailFiltersRequest) returns (GetAllEmailFiltersResponse) {
     option (audit_log_description).description = "get all email filters";
     option (google.api.http) = {
@@ -90,18 +83,6 @@ service UserSettingsService {
       body: "*"
     };
   }
-}
-
-message GenerateNewApiKeyForUserRequest{}
-
-message GenerateNewApiKeyForUserResponse{
-  UserSettings user_settings = 1;
-}
-
-message GenerateNewEsApiKeyForUserRequest{}
-
-message GenerateNewEsApiKeyForUserResponse{
-  UserSettings user_settings = 1;
 }
 
 message TestGetArchiveProvidersRequest {}
