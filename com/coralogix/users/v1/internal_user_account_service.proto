@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.coralogix.users.v1;
+
+service InternalUserAccountService {
+  rpc GetUserAccountId(GetUserAccountIdRequest) returns (GetUserAccountIdResponse) {}
+}
+
+message GetUserAccountIdRequest {
+  string user_id = 1;
+}
+
+message GetUserAccountIdResponse {
+  uint32 user_account_id = 1;
+}
